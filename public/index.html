@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gusta Pizzas - Pedidos</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>🍕 Gusta Pizzas</h1>
+    <p>Desde 2000 · Pedí tu pizza</p>
+  </header>
+
+  <main>
+    <div id="menu"></div>
+
+    <section class="card">
+      <h2>Entrega</h2>
+      <label><input type="radio" name="delivery" value="Delivery" checked /> Delivery</label>
+      <label><input type="radio" name="delivery" value="Retiro en local" /> Retiro en local</label>
+      <div id="address-fields">
+        <input type="text" id="address" placeholder="Dirección" />
+        <input type="text" id="reference" placeholder="Referencia (ej. tocar bocina)" />
+        <small>Zonas: Shangrila · San José de Carrasco · Lagomar · El Bosque · Solymar · Lomas de Solymar</small>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Forma de pago</h2>
+      <label><input type="radio" name="payment" value="Efectivo" checked /> Efectivo</label>
+      <label><input type="radio" name="payment" value="Transferencia" /> Transferencia</label>
+    </section>
+
+    <section class="card">
+      <input type="text" id="customer" placeholder="Tu nombre" />
+    </section>
+  </main>
+
+  <div id="cart-bar">
+    <span id="cart-total">Total: $0</span>
+    <button id="send-btn">Enviar pedido por WhatsApp</button>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

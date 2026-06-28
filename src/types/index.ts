@@ -8,5 +8,6 @@ export interface Product {
 export interface Category {
   name: string;
   note?: string;
+  image?: string;
   items: Product[];
 }

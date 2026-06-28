@@ -4,6 +4,7 @@ export const menu: Category[] = [
   {
     name: 'Calzones',
     note: '+ Faina de regalo',
+    image: '/images/calzones.jpg',
     items: [
       { id: 'cal-carne', name: 'Carne', description: 'Muzzarella, carne, cebolla y morrón', price: 350 },
       { id: 'cal-pollo', name: 'Pollo', description: 'Muzzarella, pollo y champiñones', price: 350 },
@@ -17,6 +18,7 @@ export const menu: Category[] = [
   {
     name: 'Pizzetas Gourmet 32 cm',
     note: '+ Faina de regalo',
+    image: '/images/gourmet.jpg',
     items: [
       { id: 'gourmet-4quesos', name: 'Cuatro Quesos', description: 'Muzzarella, dambo, provolone y roquefort', price: 400 },
       { id: 'gourmet-melanzani', name: 'Melanzani', description: 'Muzzarella, berenjena y parmesano', price: 400 },
@@ -28,6 +30,7 @@ export const menu: Category[] = [
   {
     name: 'Pizzetas 32 cm',
     note: '+ Faina de regalo · Sabores extras $50 c/u',
+    image: '/images/pizzetas.jpg',
     items: [
       { id: 'piz-pizzeta', name: 'Pizzeta', description: 'Solo salsa', price: 150 },
       { id: 'piz-cowboy', name: 'Cowboy', description: 'Muzzarella, panceta y huevo', price: 350 },
@@ -42,6 +45,7 @@ export const menu: Category[] = [
   },
   {
     name: 'Metro de Pizza',
+    image: '/images/metro.jpg',
     items: [
       { id: 'metro-muzza', name: '1 Metro con Muzza + 4 Faina', price: 700 },
       { id: 'medio-muzza', name: '1/2 Metro con Muzza + 2 Faina', price: 400 },
@@ -50,6 +54,7 @@ export const menu: Category[] = [
   },
   {
     name: 'Especiales',
+    image: '/images/especiales.jpg',
     items: [
       { id: 'pizzeta-rellena', name: 'Pizzeta Rellena 32 cm', description: 'Jamón, aceituna, morrón y huevo', price: 600 },
       { id: 'calzone-2', name: 'Calzone para 2 + 2 Faina', price: 600 }
@@ -57,6 +62,7 @@ export const menu: Category[] = [
   },
   {
     name: 'Faina',
+    image: '/images/faina.jpg',
     items: [
       { id: 'faina', name: 'Porción de Faina', price: 80 },
       { id: 'faina-queso', name: 'Porción de Faina de Queso', price: 100 }

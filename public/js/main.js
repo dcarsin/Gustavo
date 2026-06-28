@@ -18,6 +18,14 @@ function renderMenu() {
     title.innerHTML = `${category.name}${category.note ? ` <span class="category-note">${category.note}</span>` : ''}`;
     container.appendChild(title);
 
+    if (category.image) {
+      const img = document.createElement('img');
+      img.className = 'category-image';
+      img.src = category.image;
+      img.alt = category.name;
+      container.appendChild(img);
+    }
+
     const card = document.createElement('div');
     card.className = 'card';
 
@@ -75,12 +83,21 @@ function buildSummary() {
   let total = 0;
   const lines = ['*🍕 NUEVO PEDIDO - Gusta Pizzas*', ''];
 
-  Object.values(cart).forEach(({ product, qty }) => {
-    lines.push(`${qty}x ${product.name} - $${product.price * qty}`);
-    total += product.price * qty;
+  // Recorremos cada categoría en orden y mostramos solo lo que se pidió
+  menu.forEach(category => {
+    const itemsPedidos = category.items.filter(p => cart[p.id]);
+
+    if (itemsPedidos.length > 0) {
+      lines.push(`*${category.name}*`);
+      itemsPedidos.forEach(p => {
+        const qty = cart[p.id].qty;
+        lines.push(`  ${qty}x ${p.name} - $${p.price * qty}`);
+        total += p.price * qty;
+      });
+      lines.push('');
+    }
   });
 
-  lines.push('');
   lines.push(`*Total: $${total}*`);
   lines.push('');
 
@@ -100,22 +117,5 @@ function buildSummary() {
 
   return lines.join('\n');
 }
-
-document.getElementById('send-btn').addEventListener('click', () => {
-  if (Object.keys(cart).length === 0) {
-    alert('Agregá al menos un producto a tu pedido.');
-    return;
-  }
-
-  const delivery = document.querySelector('[name="delivery"]:checked').value;
-  if (delivery === 'Delivery' && !document.getElementById('address').value.trim()) {
-    alert('Por favor ingresá tu dirección para el delivery.');
-    return;
-  }
-
-  const summary = buildSummary();
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(summary)}`;
-  window.open(url, '_blank');
-});
 
 loadMenu();

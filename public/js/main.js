@@ -81,7 +81,7 @@ function updateTotal() {
 
 function buildSummary() {
   let total = 0;
-  const lines = ['*🍕 NUEVO PEDIDO - Gusta Pizzas*', ''];
+  const lines = ['*NUEVO PEDIDO - Gusta Pizzas*', ''];
 
   // Recorremos cada categoría en orden y mostramos solo lo que se pidió
   menu.forEach(category => {
@@ -117,5 +117,22 @@ function buildSummary() {
 
   return lines.join('\n');
 }
+
+document.getElementById('send-btn').addEventListener('click', () => {
+  if (Object.keys(cart).length === 0) {
+    alert('Agregá al menos un producto a tu pedido.');
+    return;
+  }
+
+  const delivery = document.querySelector('[name="delivery"]:checked').value;
+  if (delivery === 'Delivery' && !document.getElementById('address').value.trim()) {
+    alert('Por favor ingresá tu dirección para el delivery.');
+    return;
+  }
+
+  const summary = buildSummary();
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(summary)}`;
+  window.open(url, '_blank');
+});
 
 loadMenu();

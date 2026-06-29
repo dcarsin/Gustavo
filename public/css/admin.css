@@ -1,0 +1,4 @@
+body{font-family:system-ui;background:#f4f1ea;margin:0}header{background:#3a4a2a;color:#fff;padding:1rem;text-align:center}
+#orders{max-width:600px;margin:1rem auto;padding:1rem}.order{background:#fff;border-radius:10px;padding:1rem;margin-bottom:1rem;border-left:6px solid #999}
+.order.NUEVO{border-color:#e0a800}.order.EN{border-color:#0d6efd}.order.ENVIADO{border-color:#28a745;opacity:.6}
+.badge{font-weight:bold}pre{white-space:pre-wrap}button{margin:.3rem .3rem 0 0;padding:.5rem;border:none;border-radius:6px;cursor:pointer;background:#6b7a4a;color:#fff}

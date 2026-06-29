@@ -120,7 +120,7 @@ function buildSummary() {
   return lines.join('\n');
 }
 
-document.getElementById('send-btn').addEventListener('click', () => {
+document.getElementById('send-btn').addEventListener('click', async () => {
   if (Object.keys(cart).length === 0) {
     alert('Agregá al menos un producto a tu pedido.');
     return;
@@ -137,8 +137,11 @@ document.getElementById('send-btn').addEventListener('click', () => {
       return;
     }
   }
-
-  const summary = buildSummary();
+const summary = buildSummary();
+  await fetch('/api/orders', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: summary })
+  });
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(summary)}`;
   window.open(url, '_blank');
 });

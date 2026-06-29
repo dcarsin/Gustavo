@@ -127,16 +127,21 @@ document.getElementById('send-btn').addEventListener('click', () => {
   }
 
   const delivery = document.querySelector('[name="delivery"]:checked').value;
-  if (delivery === 'Delivery' && !document.getElementById('address').value.trim()) {
-    alert('Por favor ingresá tu dirección para el delivery.');
-    return;
+  if (delivery === 'Delivery') {
+    if (!document.getElementById('address').value.trim()) {
+      alert('Por favor ingresá tu dirección para el delivery.');
+      return;
+    }
+    if (!ubicacion) {
+      alert('Por favor tocá "📍 Compartir mi ubicación" antes de enviar.');
+      return;
+    }
   }
 
   const summary = buildSummary();
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(summary)}`;
   window.open(url, '_blank');
 });
-
 
 document.getElementById('location-btn').addEventListener('click', () => {
   const status = document.getElementById('location-status');

@@ -18,11 +18,12 @@
     <section class="card">
       <h2>Entrega</h2>
       <label><input type="radio" name="delivery" value="Delivery" checked /> Delivery</label>
-      <label><input type="radio" name="delivery" value="Retiro en local" /> Retiro en local</label>
+      <label><input type="radio" name="delivery" value="Retiro en local" /> Retiro en local</label>      
       <div id="address-fields">
         <input type="text" id="address" placeholder="Dirección" />
         <input type="text" id="reference" placeholder="Referencia (ej. tocar bocina)" />
-        <small>Zonas: Shangrila · San José de Carrasco · Lagomar · El Bosque · Solymar · Lomas de Solymar</small>
+        <button type="button" id="location-btn">📍 Compartir mi ubicación</button>
+        <small id="location-status">Zonas: Shangrila · San José de Carrasco · Lagomar · El Bosque · Solymar · Lomas de Solymar</small>
       </div>
     </section>
 

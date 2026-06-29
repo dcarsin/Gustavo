@@ -1,5 +1,6 @@
 const WHATSAPP_NUMBER = '59892927733';
 let menu = [];
+let ubicacion = '';
 const cart = {};
 
 async function loadMenu() {
@@ -112,6 +113,7 @@ function buildSummary() {
   if (delivery === 'Delivery') {
     if (address) lines.push(`Dirección: ${address}`);
     if (reference) lines.push(`Referencia: ${reference}`);
+    if (ubicacion) lines.push(`Ubicación: ${ubicacion}`);
   }
   lines.push(`Pago: ${payment}`);
 
@@ -133,6 +135,24 @@ document.getElementById('send-btn').addEventListener('click', () => {
   const summary = buildSummary();
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(summary)}`;
   window.open(url, '_blank');
+});
+
+
+document.getElementById('location-btn').addEventListener('click', () => {
+  const status = document.getElementById('location-status');
+  if (!navigator.geolocation) {
+    status.textContent = 'Tu teléfono no soporta ubicación.';
+    return;
+  }
+  status.textContent = 'Obteniendo ubicación...';
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      const { latitude, longitude } = pos.coords;
+      ubicacion = `https://maps.google.com/?q=${latitude},${longitude}`;
+      status.textContent = '✅ Ubicación lista';
+    },
+    () => { status.textContent = '❌ No se pudo obtener (activá el GPS)'; }
+  );
 });
 
 loadMenu();

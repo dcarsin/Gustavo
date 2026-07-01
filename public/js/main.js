@@ -220,6 +220,16 @@ CAMPOS.forEach(id => {
   });
 });
 
+function toggleDeliveryFields() {
+  const delivery = document.querySelector('[name="delivery"]:checked').value;
+  document.getElementById('address-fields').style.display =
+    delivery === 'Delivery' ? 'block' : 'none';
+}
+
+document.querySelectorAll('[name="delivery"]').forEach(radio => {
+  radio.addEventListener('change', toggleDeliveryFields);
+});
+
 // Refresca la vista según lo restaurado
 toggleDeliveryFields();
 togglePaymentInfo();

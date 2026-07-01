@@ -163,4 +163,24 @@ document.getElementById('location-btn').addEventListener('click', () => {
   );
 });
 
+
+function togglePaymentInfo() {
+  const payment = document.querySelector('[name="payment"]:checked').value;
+  document.getElementById('transfer-info').style.display =
+    payment === 'Transferencia' ? 'block' : 'none';
+}
+
+document.querySelectorAll('[name="payment"]').forEach(radio => {
+  radio.addEventListener('change', togglePaymentInfo);
+});
+togglePaymentInfo();
+
+document.getElementById('copy-btn').addEventListener('click', () => {
+  navigator.clipboard.writeText('3701673445');
+  document.getElementById('copy-btn').textContent = '✅ ¡Copiado!';
+  setTimeout(() => {
+    document.getElementById('copy-btn').textContent = '📋 Copiar número de cuenta';
+  }, 2000);
+});
+
 loadMenu();

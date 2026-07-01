@@ -151,7 +151,7 @@ document.getElementById('send-btn').addEventListener('click', async () => {
       return;
     }
   }
-const summary = buildSummary();
+  const summary = buildSummary();
   await fetch('/api/orders', {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ text: summary })
@@ -183,7 +183,7 @@ function togglePaymentInfo() {
   document.getElementById('transfer-info').style.display =
     payment === 'Transferencia' ? 'block' : 'none';
 }
- 
+
 document.querySelectorAll('[name="payment"]').forEach(radio => {
   radio.addEventListener('change', togglePaymentInfo);
 });
@@ -197,4 +197,30 @@ document.getElementById('copy-btn').addEventListener('click', () => {
   }, 2000);
 });
 
+const CAMPOS = ['customer', 'phone', 'address', 'reference'];
+CAMPOS.forEach(id => {
+  const guardado = localStorage.getItem('gp_' + id);
+  if (guardado) document.getElementById(id).value = guardado;
+
+  // Al escribir: guarda automáticamente
+  document.getElementById(id).addEventListener('input', e => {
+    localStorage.setItem('gp_' + id, e.target.value);
+  });
+});
+['delivery', 'payment'].forEach(name => {
+  const guardado = localStorage.getItem('gp_' + name);
+  if (guardado) {
+    const radio = document.querySelector(`[name="${name}"][value="${guardado}"]`);
+    if (radio) radio.checked = true;
+  }
+  document.querySelectorAll(`[name="${name}"]`).forEach(radio => {
+    radio.addEventListener('change', e => {
+      localStorage.setItem('gp_' + name, e.target.value);
+    });
+  });
+});
+
+// Refresca la vista según lo restaurado
+toggleDeliveryFields();
+togglePaymentInfo();
 loadMenu();

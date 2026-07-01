@@ -80,14 +80,23 @@ function updateTotal() {
   document.getElementById('cart-total').textContent = `Total: $${total}`;
 }
 
+function phoneToWa(phone) {
+  let clean = phone.replace(/\D/g, '');       // deja solo números
+  if (clean.startsWith('0')) clean = clean.slice(1); // saca el 0 inicial
+  return '598' + clean;                         // agrega código de Uruguay
+}
+
 function buildSummary() {
   let total = 0;
-  const lines = ['*NUEVO PEDIDO - Gusta Pizzas*', ''];
+  const phone = document.getElementById('phone').value.trim();
 
-  // Recorremos cada categoría en orden y mostramos solo lo que se pidió
+  const titulo = phone ? `*NUEVO PEDIDO - ${phone}*` : '*NUEVO PEDIDO - Gusta Pizzas*';
+  const lines = [titulo];
+  if (phone) lines.push(`💬 Chatear: https://wa.me/${phoneToWa(phone)}`);
+  lines.push('');
+
   menu.forEach(category => {
     const itemsPedidos = category.items.filter(p => cart[p.id]);
-
     if (itemsPedidos.length > 0) {
       lines.push(`*${category.name}*`);
       itemsPedidos.forEach(p => {
@@ -123,6 +132,11 @@ function buildSummary() {
 document.getElementById('send-btn').addEventListener('click', async () => {
   if (Object.keys(cart).length === 0) {
     alert('Agregá al menos un producto a tu pedido.');
+    return;
+  }
+
+  if (!document.getElementById('phone').value.trim()) {
+    alert('Por favor ingresá tu teléfono.');
     return;
   }
 
@@ -169,7 +183,7 @@ function togglePaymentInfo() {
   document.getElementById('transfer-info').style.display =
     payment === 'Transferencia' ? 'block' : 'none';
 }
-
+ 
 document.querySelectorAll('[name="payment"]').forEach(radio => {
   radio.addEventListener('change', togglePaymentInfo);
 });
